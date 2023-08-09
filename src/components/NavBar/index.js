@@ -1,48 +1,24 @@
-import React, {useContext, useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import HomeIcon from '@material-ui/icons/Home';
-import CompareArrowsIcon from '@material-ui/icons/CompareArrows';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
-import {makeStyles} from '@material-ui/core/styles';
-import {AuthContext} from '../../contexts/AuthContext';
 import {useHistory} from 'react-router-dom';
-
-const useStyles = makeStyles((theme) => ({
-    app: {
-        color: '#FBFAF8',
-        backgroundColor: '#0A122A',
-        paddingTop: '0.5%',
-        paddingBottom: '0.5%',
-    },
-    nav: {
-        display: 'flex',
-    },
-    icon: {
-        flex: 1,
-        display: 'flex',
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        marginLeft: '5%',
-    },
-    tabs: {
-        marginRight: '10%',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: 1000,
-    },
-}));
+import EqualizerIcon from '@material-ui/icons/Equalizer';
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import useStyles from './styles'; // Import styles from styles.js
 
 export default function AppNavbar() {
     const classes = useStyles();
-    const {updateAuth, updateToken} = useContext(AuthContext);
     const history = useHistory();
     const [value, setValue] = useState(0);
     const [disableSpaceScrolling, setDisableSpaceScrolling] = useState(false);
     const appBarRef = useRef(null);
+    const isSmallScreen = useMediaQuery('(max-width:800px)'); // Set breakpoint for small screens
 
     useEffect(() => {
         const handleKeydown = (event) => {
@@ -74,45 +50,56 @@ export default function AppNavbar() {
     };
 
     const handlePlay = () => {
-        history.push('/app/play');
+        history.push('/2D-BattleRoyale/play');
     };
 
     const handleInstructions = () => {
-        history.push('/app/instructions');
+        history.push('/2D-BattleRoyale/instructions');
     };
 
     const handleStats = () => {
-        history.push('/app/stats');
+        history.push('/2D-BattleRoyale/stats');
     };
 
-    const handleProfile = () => {
-        history.push('/app/profile');
-    };
-
-    const handleLogout = () => {
-        updateAuth(false);
-        localStorage.removeItem('token');
-        history.push('/');
+    const handleHome = () => {
+        history.push('/2D-BattleRoyale/');
     };
 
     return (
         <AppBar className={classes.app}>
             <Toolbar className={classes.nav}>
-                <Typography variant="h6" className={classes.icon}>
-                    Battle Royale
-                </Typography>
-                <Tabs
-                    className={classes.tabs}
-                    value={value}
-                    onChange={handleTabChange}
-                    centered
-                >
-                    <Tab label="Play" onClick={handlePlay} icon={<HomeIcon/>}/>
-                    <Tab label="Instructions" onClick={handleInstructions} icon={<FileCopyIcon/>}/>
-                    {/*<Tab label="Stats" onClick={handleStats} icon={<EqualizerIcon/>}/>*/}
-                    {/*<Tab label="Profile" onClick={handleProfile} icon={<PersonIcon/>}/>*/}
-                    <Tab label="Logout" onClick={handleLogout} icon={<CompareArrowsIcon/>}/>
-                </Tabs>
+                <div onClick={handleHome} className={classes.iconClickable}>
+                    {/* Make "Battle Royale" clickable */}
+                    <Typography variant="h6" className={classes.icon}>
+                        Battle Royale
+                    </Typography>
+                </div>
+                {isSmallScreen ? (
+                    // Render a mobile-friendly version for small screens
+                    <Tabs value={value} onChange={handleTabChange} centered>
+                        <Tab label={<HomeIcon/>} onClick={handleHome}/>
+                        <Tab label={<PlayArrowIcon/>} onClick={handlePlay}/>
+                        <Tab label={<FileCopyIcon/>} onClick={handleInstructions}/>
+                        <Tab label={<EqualizerIcon/>} onClick={handleStats}/>
+                    </Tabs>
+                ) : (
+                    // Render the regular tabs for larger screens
+                    <Tabs
+                        className={classes.tabs}
+                        value={value}
+                        onChange={handleTabChange}
+                        centered
+                    >
+                        <Tab label="Home" onClick={handleHome} icon={<HomeIcon/>}/>
+                        <Tab label="Play" onClick={handlePlay} icon={<PlayArrowIcon/>}/>
+                        <Tab
+                            label="Instructions"
+                            onClick={handleInstructions}
+                            icon={<FileCopyIcon/>}
+                        />
+                        <Tab label="Stats" onClick={handleStats} icon={<EqualizerIcon/>}/>
+                    </Tabs>
+                )}
             </Toolbar>
         </AppBar>
     );

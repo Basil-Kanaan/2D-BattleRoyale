@@ -1,7 +1,8 @@
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
+
+    hero: {
         height: '90vh',
         backgroundImage: 'url(https://wallpapercave.com/wp/wp6308454.jpg)',
         backgroundRepeat: 'no-repeat',
@@ -9,23 +10,21 @@ const useStyles = makeStyles((theme) => ({
             theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        position: 'relative', // Add position relative
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        color: 'white', // Text color
+        position: 'relative', // Ensure relative positioning
     },
-
+    playButtonContainer: {
+        display: 'flex',
+        alignItems: 'center', // Center vertically
+    },
     playButton: {
-        position: 'absolute',
-        bottom: '15%', // Adjust as needed
-        left: '50%',
-        transform: 'translateX(-50%)',
-    },
-    about: {
-        height: '80vh',
-    },
-    navbar: {
-        color: '#FBFAF8',
-        backgroundColor: '#0A122A',
-        paddingTop: '0.5%',
-        paddingBottom: '0.5%',
+        marginLeft: theme.spacing(2), // Add spacing between text and button
+        fontSize: '2rem', // Increase button font size
+        padding: theme.spacing(2.5, 5), // Increase padding for larger button
     },
     navtitle: {
         flex: 1,
@@ -42,40 +41,40 @@ const useStyles = makeStyles((theme) => ({
     },
 
     slogan: {
-        fontFamily: "Poppins",
-        color: "white",
-        alignItems: "center",
-        justify: "center",
-        marginTop: "10%",
-        marginLeft: "35%",
-        width: "450px"
+        fontFamily: "'Press Start 2P', cursive",
+        fontWeight: 'bold', // Make text bold
+        fontSize: '6rem', // Increase text font size
+        color: '#FFFFFF', // White text color
+        textShadow: '4px 4px 8px rgba(0, 0, 0, 0.7)', // Add text shadow
+        textAlign: 'center', // Center text
+        marginBottom: theme.spacing(2), // Add spacing at the bottom
     },
 
-    aboutmsg: {
-        fontFamily: "Poppins",
-        marginTop: "10%",
-        marginLeft: "35%",
-        margin: "50px",
-        fontSize: "10",
-        width: "500px"
+    about: {
+        height: '80vh',
     },
-
-    abouth1: {
-        marginTop: "5%",
-        marginLeft: "35%",
-
+    aboutContent: {
+        display: 'flex', // Use flexbox layout
+        justifyContent: 'center', // Center content horizontally
+        alignItems: 'center', // Center content vertically
+        height: '100%', // Stretch container vertically
+    },
+    aboutText: {
+        flex: 1, // Equal distribution of space
+        minWidth: '25%', // Set minimum width to a quarter of the parent container width
+        padding: theme.spacing(2), // Add spacing between text and image
+    },
+    aboutImage: {
+        flex: 1, // Equal distribution of space
+        display: 'flex', // Use flexbox layout for image
+        justifyContent: 'center', // Center image horizontally
+        alignItems: 'center', // Center image vertically
+        padding: theme.spacing(2), // Add padding to image container
     },
     subimage: {
-        marginTop: "15%",
-        marginLeft: "10%",
-        justify: "right",
-        width: "700px"
+        maxWidth: '100%', // Ensure image scales to container
+        maxHeight: '100%', // Ensure image scales to container
     },
-    hideBtn: {
-        '&:hover': {
-            cursor: 'pointer',
-        }
-    }
 }));
 
 export default useStyles;

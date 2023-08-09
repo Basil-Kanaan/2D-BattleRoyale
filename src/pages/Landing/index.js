@@ -1,43 +1,35 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import useStyles from './styles';
-import Grid from '@material-ui/core/Grid';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import AppNavbar from "../../components/NavBar";
 
 function Landing() {
     const classes = useStyles();
-    const myRef = useRef(null);
-    const executeScroll = () => myRef.current.scrollIntoView();
 
     return (
         <div>
-            <AppNavbar/>
-
-            <div className={classes.root}>
+            <section id={"hero"} className={classes.hero}>
                 <Typography variant="h1" className={classes.slogan}>
-                    <b>Press Play to Begin!</b>
+                    <b>PRESS PLAY TO BEGIN!</b>
                 </Typography>
                 <Button
                     variant="contained"
                     color="primary"
                     size="large"
-                    startIcon={<PlayArrowIcon />}
+                    startIcon={<PlayArrowIcon/>}
                     onClick={() => {
-                        window.location.href = '/app/play';
+                        window.location.href = '/2D-BattleRoyale/app/play';
                     }}
                     className={classes.playButton}
                 >
                     Play
                 </Button>
-            </div>
+            </section>
 
-            <div ref={myRef} id="About" className={classes.about}>
-                <Grid container>
-                    <Grid item xs={6}>
+            <section id={"about"} className={classes.about}>
+                <div className={classes.aboutContent}>
+                    <div className={classes.aboutText}>
                         <Typography variant="h3" className={classes.abouth1}>
                             <b>About Battle Royale</b>
                         </Typography>
@@ -48,21 +40,18 @@ function Landing() {
                             You need to survive as long as you can without dying, killing AI to win.
                             How long can you survive? <br/><br/>
                         </Typography>
-
-
-                    </Grid>
-                    <Grid item xs={6}>
-
+                    </div>
+                    <div className={classes.aboutImage}>
                         <img
                             src={'https://ychef.files.bbci.co.uk/976x549/p091j3dx.jpg'}
-                            className={classes.subimage}/>
+                            className={classes.subimage}
+                         alt={"gamer behind computer image"}/>
+                    </div>
+                </div>
+            </section>
 
-                    </Grid>
-                </Grid>
-
-            </div>
         </div>
     );
 }
 
-export default (Landing);
+export default Landing;

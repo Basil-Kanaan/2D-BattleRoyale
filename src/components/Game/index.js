@@ -112,7 +112,12 @@ function endGame() {
     document.removeEventListener('mousemove', aimListener, false);
     document.removeEventListener('mousedown', clickListener, false);
 
-    document.getElementById("gameContent").removeEventListener('resize', resizeCanvas, false);
+    const gameContent = document.getElementById("gameContent");
+
+    if (gameContent) {
+        removeEventListener('resize', resizeCanvas, false);
+    }
+
 
     // remove world and controls
     world = null;
@@ -177,7 +182,7 @@ function updateVelocity() {
 }
 
 
-export default function Game(props) {
+export default function Game() {
     var classes = useStyles();
 
     canvasRef = useRef(null);

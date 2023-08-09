@@ -1,36 +1,9 @@
-import React, {useContext, useEffect} from "react";
+import React from "react";
 import {Container, Grid, Paper, Typography} from "@material-ui/core";
-import {AuthContext} from '../../contexts/AuthContext';
 import useStyles from "./styles";
-import MuiAlert from '@material-ui/lab/Alert';
 
-function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
-
-export default function Instructions(props) {
+export default function Instructions() {
     const classes = useStyles();
-    const {isAuth} = useContext(AuthContext);
-
-    const checkAuth = () => {
-        fetch('http://localhost:8000/api/user/verify', {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-                jwt_token: localStorage.token
-            }
-        }).then(response => response.json()).then(data => {
-            if (data !== true) {
-                window.location.href = "/";
-            }
-        }).catch(err => {
-            console.log("Error");
-        });
-    };
-
-    useEffect(() => {
-        checkAuth();
-    }, []);
 
     return (
         <Container maxWidth="md" className={classes.root}>

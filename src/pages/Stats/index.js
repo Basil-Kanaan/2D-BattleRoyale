@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from "react";
+import React from "react";
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -6,7 +6,6 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import {AuthContext} from '../../contexts/AuthContext';
 // styles
 import useStyles from "./styles";
 import Snackbar from '@material-ui/core/Snackbar';
@@ -27,21 +26,12 @@ const rows = [
     createData('Player1', 159),
     createData('Player2', 237),
     createData('Player3', 262),
-    createData('Player4', 305),
-    createData('Player5', 356),
-    createData('Player6', 159),
-    createData('Player7', 237),
-    createData('Player8', 262),
-    createData('Player9', 305),
-    createData('Player0', 356),
 ];
 
-export default function Stats(props) {
+export default function Stats() {
     var classes = useStyles();
     const [list, setList] = React.useState([]);
-    const [value, setValue] = React.useState("");
     const [open, setOpen] = React.useState(false);
-    const {isAuth, updateAuth, updateToken} = useContext(AuthContext);
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -49,66 +39,6 @@ export default function Stats(props) {
         }
         setOpen(false);
     };
-
-    const checkAuth = () => {
-        fetch('http://localhost:8000/api/user/verify', {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-                jwt_token: localStorage.token
-            }
-        }).then(response => response.json()).then(data => {
-            if (data !== true) {
-                window.location.href = "/";
-            }
-        }).catch(err => {
-            console.log("Error");
-        });
-    };
-
-    const getUserInfo = () => {
-        fetch('http://localhost:8000/api/user/profile', {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-                jwt_token: localStorage.token
-            }
-        }).then(response => response.json()).then(data => {
-            setValue(data.firstName);
-            setEmail(data.email);
-            getBillStatus(data.email);
-
-        }).catch(err => {
-            console.log("Error");
-        });
-    };
-
-
-    const getBillStatus = (email) => {
-        console.log("EMAI" + email);
-        var formBody = [];
-        var encodedKey = encodeURIComponent("email");
-        var encodedValue = encodeURIComponent(email);
-        formBody.push(encodedKey + "=" + encodedValue);
-        formBody = formBody.join("&");
-        fetch('http://localhost:8000/api/user/bill', {
-            method: 'POST',
-            body: formBody,
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-            }
-        }).then(response => response.json()).then(data => {
-            console.log(data.length);
-            setList(data);
-        }).catch(err => {
-            alert(err);
-        });
-    };
-
-    useEffect(() => {
-        getUserInfo();
-        checkAuth();
-    }, []);
 
     return (
         <div className={classes.cardGrid}>
