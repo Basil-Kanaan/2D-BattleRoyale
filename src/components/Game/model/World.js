@@ -268,7 +268,7 @@ export default class World {
 
     removeActor(actor) {
         var index = this.actors.indexOf(actor);
-        if (index != -1) {
+        if (index !== -1) {
             this.actors.splice(index, 1);
         }
     }
@@ -287,7 +287,7 @@ export default class World {
             var className = actor1.constructor.name;
 
             // if actor1 is ai or player, change conditions based on terrain
-            if (className == "Ai" || className == "Player") {
+            if (className === "Ai" || className === "Player") {
                 if (actor1.position.y > this.height / 2) {
                     if (actor1.position.x <= this.width / 2) {
                         actor1.condition = "fast";
