@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/2D-BattleRoyale/static/css/main.390d8b62.chunk.css",
-    "main.js": "/2D-BattleRoyale/static/js/main.9bf066f8.chunk.js",
-    "main.js.map": "/2D-BattleRoyale/static/js/main.9bf066f8.chunk.js.map",
+    "main.js": "/2D-BattleRoyale/static/js/main.a5242f31.chunk.js",
+    "main.js.map": "/2D-BattleRoyale/static/js/main.a5242f31.chunk.js.map",
     "runtime-main.js": "/2D-BattleRoyale/static/js/runtime-main.baaf72c9.js",
     "runtime-main.js.map": "/2D-BattleRoyale/static/js/runtime-main.baaf72c9.js.map",
     "static/js/2.f90f22fc.chunk.js": "/2D-BattleRoyale/static/js/2.f90f22fc.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.baaf72c9.js",
     "static/js/2.f90f22fc.chunk.js",
     "static/css/main.390d8b62.chunk.css",
-    "static/js/main.9bf066f8.chunk.js"
+    "static/js/main.a5242f31.chunk.js"
   ]
 }
