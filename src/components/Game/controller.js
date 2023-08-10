@@ -183,7 +183,7 @@ function endGame() {
     // remove intervals for all Ai
     for (var i = 0; i < world.actors.length; i++) {
         var actor = world.actors[i];
-        if (actor.constructor.name == "Ai") {
+        if (actor.name == "Ai") {
             clearInterval(actor.interval);
             actor.interval = null;
         }

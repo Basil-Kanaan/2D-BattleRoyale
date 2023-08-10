@@ -5,7 +5,7 @@ import useStyles from './styles';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import {useHistory} from "react-router-dom";
 
-function Landing({ setSelectedTab }) {
+function Landing({setSelectedTab}) {
     const classes = useStyles();
     const history = useHistory(); // Create a history object
 
@@ -48,7 +48,7 @@ function Landing({ setSelectedTab }) {
                         <img
                             src={'https://ychef.files.bbci.co.uk/976x549/p091j3dx.jpg'}
                             className={classes.subimage}
-                         alt={"gamer behind computer image"}/>
+                            alt={"gamer behind computer image"}/>
                     </div>
                 </div>
             </section>

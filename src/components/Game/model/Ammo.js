@@ -13,6 +13,7 @@ export default class Ammo extends Ball {
         this.amount = amount;
         this.type = type;
         this.num_balls = num_balls;
+        this.name = "Ammo";
 
         this.randballs = [];
         for (var i = 0; i < this.num_balls; i++) {

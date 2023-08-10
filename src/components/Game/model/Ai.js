@@ -6,6 +6,7 @@ export default class Ai extends Ball {
     constructor(position, velocity, colour, radius, health, weapon, type) {
         super(position, velocity, colour, radius);
 
+        this.name = "Ai";
         this.health = health;
         this.turret_position = new Pair(0, 0);
         this.ammo = 1000;

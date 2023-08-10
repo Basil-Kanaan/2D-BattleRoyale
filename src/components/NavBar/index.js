@@ -12,7 +12,7 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import useStyles from './styles'; // Import styles from styles.js
 
-export default function AppNavbar({ selectedTab, setSelectedTab }) {
+export default function AppNavbar({selectedTab, setSelectedTab}) {
     const classes = useStyles();
     const history = useHistory();
     const [disableSpaceScrolling, setDisableSpaceScrolling] = useState(false);

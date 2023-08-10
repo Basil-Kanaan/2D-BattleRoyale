@@ -6,6 +6,7 @@ export default class Player extends Ball {
     constructor(position, velocity, colour, radius, health) {
         super(position, velocity, colour, radius);
 
+        this.name = "Player";
         this.health = health;
         this.turret_position = new Pair(0, 0);
         this.ammo = {"pistol": 10, "railgun": 5, "cannon": 1};

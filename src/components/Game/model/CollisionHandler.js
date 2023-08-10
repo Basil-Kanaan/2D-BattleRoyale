@@ -66,10 +66,9 @@ export default class CollisionHandler {
 
     // collision handler, uses helper functions
     handle(obj1, obj2) {
-        console.log("collision handler before null")
         if (obj1 == null || obj2 == null) return;
 
-        switch (obj1.constructor.name) {
+        switch (obj1.name) {
 
             case "Player":
                 this.handlePlayer(obj1, obj2);
@@ -83,12 +82,11 @@ export default class CollisionHandler {
                 this.handleAi(obj1, obj2);
                 break;
         }
-        console.log("collision handler")
     }
 
     // player to ai/wall/ammo handler
     handlePlayer(player, obj2) {
-        switch (obj2.constructor.name) {
+        switch (obj2.name) {
 
             case "Ai":
                 if (this.isCollision["ballball"](player, obj2)) {
@@ -119,7 +117,7 @@ export default class CollisionHandler {
 
     // bullet to wall/player/ai handler
     handleBullet(bullet, obj2) {
-        var className2 = obj2.constructor.name;
+        var className2 = obj2.name;
         switch (className2) {
             case "Wall":
                 if (this.isCollision["ballwall"](bullet, obj2)) {
@@ -161,7 +159,7 @@ export default class CollisionHandler {
 
     // ai to ai/wall handler
     handleAi(ai, obj2) {
-        switch (obj2.constructor.name) {
+        switch (obj2.name) {
 
             case "Ai":
                 if (this.isCollision["ballball"](ai, obj2)) {

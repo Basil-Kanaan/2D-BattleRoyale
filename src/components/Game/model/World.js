@@ -113,7 +113,7 @@ export default class World {
             for (let i = 0; i < this.actors.length; i++) {
 
                 const actor = this.actors[i];
-                const className = actor.constructor.name;
+                const className = actor.name;
 
                 if (actor === this.player) {
                     continue;
@@ -286,11 +286,10 @@ export default class World {
         for (let i = 0; i < this.actors.length; i++) {
 
             const actor1 = this.actors[i];
-            const className = actor1.constructor.name;
+            const className = actor1.name;
 
             // if actor1 is ai or player, change conditions based on terrain
             if (className == "Ai" || className == "Player") {
-                console.log("player or ai")
                 if (actor1.position.y > this.height / 2) {
                     if (actor1.position.x <= this.width / 2) {
                         actor1.condition = "fast";
@@ -333,15 +332,12 @@ export default class World {
 
             // actor1 takes a step
             actor1.step();
-            console.log("step taken 3" + " classname: " + className)
             // if actor1 is an ai, player, or bullet, check collisions
             if (className === "Ai" || className === "Player" || className === "Bullet") {
-                console.log("actor is ai player or bullet")
-
                 for (let j = 0; j < this.actors.length; j++) {
 
                     const actor2 = this.actors[j];
-                    const className2 = actor2.constructor.name;
+                    const className2 = actor2.name;
 
                     // ignore actor 2 if they are a bullet or ammo. smart :)
                     if (className === "Bullet" && (className2 === "Bullet" || className2 === "Ammo") || i === j) {

@@ -14,11 +14,11 @@ export default function App() {
 
     return (
         <div className="App">
-            <AppNavbar selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
+            <AppNavbar selectedTab={selectedTab} setSelectedTab={setSelectedTab}/>
             <Switch>
                 <Route
                     path="/2D-BattleRoyale/"
-                    render={(props) => <Landing {...props} setSelectedTab={setSelectedTab} />}
+                    render={(props) => <Landing {...props} setSelectedTab={setSelectedTab}/>}
                     exact
                 />
                 <Route path="/2D-BattleRoyale/play" component={Play} exact/>

@@ -5,6 +5,7 @@ export default class Wall {
         this.health = Math.max(width, height) * 2;
         this.points = this.health * 2;
 
+        this.name = "Wall";
         this.position = position;
         this.colour = colour;
         this.width = width;
