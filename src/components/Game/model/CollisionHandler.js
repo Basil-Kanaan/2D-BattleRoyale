@@ -66,6 +66,7 @@ export default class CollisionHandler {
 
     // collision handler, uses helper functions
     handle(obj1, obj2) {
+        console.log("collision handler before null")
         if (obj1 == null || obj2 == null) return;
 
         switch (obj1.constructor.name) {

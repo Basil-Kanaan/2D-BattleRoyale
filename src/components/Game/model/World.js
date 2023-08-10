@@ -334,9 +334,12 @@ export default class World {
 
             // actor1 takes a step
             actor1.step();
+            console.log("step taken 2")
 
             // if actor1 is an ai, player, or bullet, check collisions
             if (className == "Ai" || className == "Player" || className == "Bullet") {
+                console.log("actor is ai player or bullet")
+
                 for (let j = 0; j < this.actors.length; j++) {
 
                     const actor2 = this.actors[j];
@@ -351,7 +354,6 @@ export default class World {
                 }
             }
         }
-        console.log("step taken 1")
     }
 
     // return the first actor at coordinates (x,y) return null if there is no such actor
