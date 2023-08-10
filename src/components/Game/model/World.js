@@ -168,8 +168,8 @@ export default class World {
         var rows = Math.floor(this.width / cell);
         var columns = Math.floor(this.height / cell);
 
-        var purple = `rgba(${[56, 8, 82].join()},1)`;
-        var yellow = `rgba(${[219, 214, 46].join()},1)`;
+        const purple = `rgba(${[56, 8, 82].join()},1)`;
+        const yellow = `rgba(${[219, 214, 46].join()},1)`;
         var green = `rgba(${[33, 171, 26].join()},1)`;
         var blue = `rgba(${[0, 204, 197].join()},1)`;
 
@@ -304,7 +304,7 @@ export default class World {
             }
 
             // if actor1 is ai, move/shoot depending on position to player
-            if (className == "Ai") {
+            if (className === "Ai") {
                 var AiToPlayerVector = this.player.position.copy().sub(actor1.position);
                 var x = AiToPlayerVector.x;
                 var y = AiToPlayerVector.y;
@@ -317,7 +317,7 @@ export default class World {
 
                 } else {
                     actor1.velocity = new Pair(0, 0);
-                    if (actor1.interval == null) {
+                    if (actor1.interval === null) {
 
                         actor1.interval = setInterval((world, actor, player) => {
                             var position = actor.turret_position.copy();
@@ -333,14 +333,14 @@ export default class World {
             actor1.step();
 
             // if actor1 is an ai, player, or bullet, check collisions
-            if (className == "Ai" || className == "Player" || className == "Bullet") {
+            if (className === "Ai" || className === "Player" || className === "Bullet") {
                 for (var j = 0; j < this.actors.length; j++) {
 
                     var actor2 = this.actors[j];
                     var className2 = actor2.constructor.name;
 
                     // ignore actor 2 if they are a bullet or ammo. smart :)
-                    if (className == "Bullet" && (className2 == "Bullet" || className2 == "Ammo") || i == j) {
+                    if (className === "Bullet" && (className2 === "Bullet" || className2 === "Ammo") || i === j) {
                         continue;
                     }
 
@@ -348,12 +348,13 @@ export default class World {
                 }
             }
         }
+        console.log("step taken")
     }
 
     // return the first actor at coordinates (x,y) return null if there is no such actor
     getActor(x, y) {
         for (var i = 0; i < this.actors.length; i++) {
-            if (this.actors[i].x == x && this.actors[i].y == y) {
+            if (this.actors[i].x === x && this.actors[i].y === y) {
                 return this.actors[i];
             }
         }
