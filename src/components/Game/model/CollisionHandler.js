@@ -24,10 +24,8 @@ export default class CollisionHandler {
                 var dy = obj1.y - obj2.y;
                 var distance = Math.sqrt(dx * dx + dy * dy);
 
-                if (distance < obj1.radius + obj2.radius) {
-                    return true;
-                }
-                return false;
+                return distance < obj1.radius + obj2.radius;
+
             },
 
             // Ball to Wall collision checker function
@@ -84,6 +82,7 @@ export default class CollisionHandler {
                 this.handleAi(obj1, obj2);
                 break;
         }
+        console.log("collision handler")
     }
 
     // player to ai/wall/ammo handler
@@ -136,7 +135,7 @@ export default class CollisionHandler {
             case "Ai":
 
                 if (this.isCollision["ballball"](bullet, obj2)) {
-                    if (obj2.condition == "hurt") {
+                    if (obj2.condition === "hurt") {
                         obj2.health -= bullet.damage;
                     }
 
@@ -144,7 +143,7 @@ export default class CollisionHandler {
                     this.world.removeActor(bullet);
 
                     if (obj2.health <= 0) {
-                        if (className2 == "Ai") {
+                        if (className2 === "Ai") {
                             this.world.removeActor(obj2);
                             clearInterval(obj2.interval);
                             obj2.interval = null;
