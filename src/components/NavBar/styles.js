@@ -6,6 +6,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: '#0A122A',
         paddingTop: '0.5%',
         paddingBottom: '0.5%',
+        position: 'relative'
     },
     nav: {
         display: 'flex',

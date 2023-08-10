@@ -3,9 +3,11 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import useStyles from './styles';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import {useHistory} from "react-router-dom";
 
-function Landing() {
+function Landing({ setSelectedTab }) {
     const classes = useStyles();
+    const history = useHistory(); // Create a history object
 
     return (
         <div>
@@ -19,7 +21,8 @@ function Landing() {
                     size="large"
                     startIcon={<PlayArrowIcon/>}
                     onClick={() => {
-                        window.location.href = '/2D-BattleRoyale/app/play';
+                        setSelectedTab(1);
+                        history.push('/2D-BattleRoyale/play');
                     }}
                     className={classes.playButton}
                 >
@@ -31,7 +34,7 @@ function Landing() {
                 <div className={classes.aboutContent}>
                     <div className={classes.aboutText}>
                         <Typography variant="h3" className={classes.abouth1}>
-                            <b>About Battle Royale</b>
+                            <b>About Battle Royale</b><br/><br/>
                         </Typography>
 
                         <Typography variant="h5" className={classes.aboutmsg}>

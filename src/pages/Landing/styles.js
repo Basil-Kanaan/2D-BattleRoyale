@@ -55,14 +55,23 @@ const useStyles = makeStyles((theme) => ({
     },
     aboutContent: {
         display: 'flex', // Use flexbox layout
+        flexDirection: 'column', // Stack content vertically
         justifyContent: 'center', // Center content horizontally
         alignItems: 'center', // Center content vertically
         height: '100%', // Stretch container vertically
+        [theme.breakpoints.down('sm')]: {
+            flexDirection: 'column', // Stack content vertically on small screens
+            textAlign: 'center', // Center content horizontally on small screens
+        },
     },
     aboutText: {
         flex: 1, // Equal distribution of space
-        minWidth: '25%', // Set minimum width to a quarter of the parent container width
-        padding: theme.spacing(2), // Add spacing between text and image
+        display: 'flex', // Use flexbox layout
+        flexDirection: 'column', // Stack items vertically
+        justifyContent: 'center', // Center content horizontally
+        alignItems: 'center', // Center content vertically
+        padding: theme.spacing(10, 5, 5, 5), // Add spacing around text
+        textAlign: 'center'
     },
     aboutImage: {
         flex: 1, // Equal distribution of space

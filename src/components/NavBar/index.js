@@ -12,13 +12,12 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import useStyles from './styles'; // Import styles from styles.js
 
-export default function AppNavbar() {
+export default function AppNavbar({ selectedTab, setSelectedTab }) {
     const classes = useStyles();
     const history = useHistory();
-    const [value, setValue] = useState(0);
     const [disableSpaceScrolling, setDisableSpaceScrolling] = useState(false);
     const appBarRef = useRef(null);
-    const isSmallScreen = useMediaQuery('(max-width:800px)'); // Set breakpoint for small screens
+    const isSmallScreen = useMediaQuery('(max-width:800px)');
 
     useEffect(() => {
         const handleKeydown = (event) => {
@@ -35,7 +34,7 @@ export default function AppNavbar() {
     }, [disableSpaceScrolling]);
 
     const handleTabChange = (event, newValue) => {
-        setValue(newValue);
+        setSelectedTab(newValue);
 
         // Enable/disable spacebar scrolling based on the tab clicked
         if (newValue === 0) {
@@ -50,18 +49,22 @@ export default function AppNavbar() {
     };
 
     const handlePlay = () => {
+        setSelectedTab(1); // Set the selected tab to "Play" (index 1)
         history.push('/2D-BattleRoyale/play');
     };
 
     const handleInstructions = () => {
+        setSelectedTab(2);
         history.push('/2D-BattleRoyale/instructions');
     };
 
     const handleStats = () => {
+        setSelectedTab(3);
         history.push('/2D-BattleRoyale/stats');
     };
 
     const handleHome = () => {
+        setSelectedTab(0);
         history.push('/2D-BattleRoyale/');
     };
 
@@ -76,7 +79,7 @@ export default function AppNavbar() {
                 </div>
                 {isSmallScreen ? (
                     // Render a mobile-friendly version for small screens
-                    <Tabs value={value} onChange={handleTabChange} centered>
+                    <Tabs value={selectedTab} onChange={handleTabChange} centered>
                         <Tab label={<HomeIcon/>} onClick={handleHome}/>
                         <Tab label={<PlayArrowIcon/>} onClick={handlePlay}/>
                         <Tab label={<FileCopyIcon/>} onClick={handleInstructions}/>
@@ -86,7 +89,7 @@ export default function AppNavbar() {
                     // Render the regular tabs for larger screens
                     <Tabs
                         className={classes.tabs}
-                        value={value}
+                        value={selectedTab}
                         onChange={handleTabChange}
                         centered
                     >
@@ -97,7 +100,7 @@ export default function AppNavbar() {
                             onClick={handleInstructions}
                             icon={<FileCopyIcon/>}
                         />
-                        <Tab label="Stats" onClick={handleStats} icon={<EqualizerIcon/>}/>
+                        {/*<Tab label="Stats" onClick={handleStats} icon={<EqualizerIcon/>}/>*/}
                     </Tabs>
                 )}
             </Toolbar>

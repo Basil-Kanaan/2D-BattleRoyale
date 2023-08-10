@@ -5,6 +5,7 @@ export default makeStyles((theme) => ({
         display: "flex",
         flexDirection: "column",
         flexGrow: 1,
+        padding: theme.spacing(2),
     },
     gameView: {
         alignSelf: "center",
