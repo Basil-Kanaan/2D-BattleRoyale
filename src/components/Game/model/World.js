@@ -351,6 +351,7 @@ export default class World {
                 }
             }
         }
+        console.log("step taken 1")
     }
 
     // return the first actor at coordinates (x,y) return null if there is no such actor
