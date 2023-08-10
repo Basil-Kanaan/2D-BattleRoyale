@@ -282,15 +282,16 @@ export default class World {
         this.camera.x = this.player.x - this.camera.width / 2;
         this.camera.y = this.player.y - this.camera.height / 2;
 
-        console.log(this.actors.length)
         // for each actor, take a step and perform operations
         for (let i = 0; i < this.actors.length; i++) {
 
             const actor1 = this.actors[i];
             const className = actor1.constructor.name;
+            console.log("checking actor className")
 
             // if actor1 is ai or player, change conditions based on terrain
-            if (className === "Ai" || className === "Player") {
+            if (className == "Ai" || className == "Player") {
+                console.log("player or ai")
                 if (actor1.position.y > this.height / 2) {
                     if (actor1.position.x <= this.width / 2) {
                         actor1.condition = "fast";
@@ -307,7 +308,7 @@ export default class World {
             }
 
             // if actor1 is ai, move/shoot depending on position to player
-            if (className === "Ai") {
+            if (className == "Ai") {
                 const AiToPlayerVector = this.player.position.copy().sub(actor1.position);
                 const x = AiToPlayerVector.x;
                 const y = AiToPlayerVector.y;
@@ -335,7 +336,7 @@ export default class World {
             actor1.step();
 
             // if actor1 is an ai, player, or bullet, check collisions
-            if (className === "Ai" || className === "Player" || className === "Bullet") {
+            if (className == "Ai" || className == "Player" || className == "Bullet") {
                 for (let j = 0; j < this.actors.length; j++) {
 
                     const actor2 = this.actors[j];
@@ -350,7 +351,6 @@ export default class World {
                 }
             }
         }
-        console.log("step taken")
     }
 
     // return the first actor at coordinates (x,y) return null if there is no such actor
