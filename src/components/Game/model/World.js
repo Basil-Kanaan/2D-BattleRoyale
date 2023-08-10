@@ -15,14 +15,14 @@ function rand(n) {
     return Math.random() * n;
 }
 
-var playerHealth = 100;
-var AiSpeed = 12;
+let playerHealth = 100;
+const AiSpeed = 12;
 
 // Model! World
 export default class World {
     constructor(collisionHandler, ammunitionFactory, aiFactory, difficulty, canvas) {
 
-        var normalAi, sprayAi, bossAi;
+        let normalAi, sprayAi, bossAi;
 
         // change game settings based on difficulty
         switch (difficulty) {
@@ -94,26 +94,26 @@ export default class World {
     // adds player to actors and world
     spawnPlayer() {
         // init player data
-        var velocity = new Pair(0, 0);
-        var radius = 20;
-        var colour = 'rgba(77,153,79,1)';
+        const velocity = new Pair(0, 0);
+        const radius = 20;
+        const colour = 'rgba(77,153,79,1)';
 
         while (true) {
 
-            var x = randint(this.width - radius * 2) + radius;
-            var y = randint(this.height - radius * 2) + radius;
-            var position = new Pair(x, y);
+            const x = randint(this.width - radius * 2) + radius;
+            const y = randint(this.height - radius * 2) + radius;
+            const position = new Pair(x, y);
 
             this.player = null;
             this.addPlayer(new Player(position, velocity, colour, radius, playerHealth));
 
-            var isColliding = false;
+            let isColliding = false;
 
             // for each actor, take a step and perform operations
-            for (var i = 0; i < this.actors.length; i++) {
+            for (let i = 0; i < this.actors.length; i++) {
 
-                var actor = this.actors[i];
-                var className = actor.constructor.name;
+                const actor = this.actors[i];
+                const className = actor.constructor.name;
 
                 if (actor === this.player) {
                     continue;
@@ -144,11 +144,11 @@ export default class World {
     // player shoot event handler
     playerShoot(event) {
         if (this.player.ammo[this.player.weapon] > 0) {
-            var playerRelativePos = new Pair(this.player.x - this.camera.x, this.player.y - this.camera.y);
-            var mouseRelativePos = this.camera.getMousePos(this.mouse);
+            const playerRelativePos = new Pair(this.player.x - this.camera.x, this.player.y - this.camera.y);
+            const mouseRelativePos = this.camera.getMousePos(this.mouse);
 
-            var position = this.player.turret_position.copy();
-            var velocity = mouseRelativePos.sub(playerRelativePos).normalize().mult(25);
+            const position = this.player.turret_position.copy();
+            const velocity = mouseRelativePos.sub(playerRelativePos).normalize().mult(25);
 
             this.shootBullet(position, velocity, this.player.weapon, this.player);
             this.player.ammo[this.player.weapon]--;
@@ -158,25 +158,27 @@ export default class World {
     // generate map background
     generateMap() {
 
-        var context = document.createElement("canvas").getContext("2d");
+        let context = document.createElement("canvas").getContext("2d");
         context.canvas.width = this.width;
         context.canvas.height = this.height;
 
-        var cell = 34;
-        var square = 33;
+        const cell = 34;
+        const square = 33;
 
-        var rows = Math.floor(this.width / cell);
-        var columns = Math.floor(this.height / cell);
+        const rows = Math.floor(this.width / cell);
+        const columns = Math.floor(this.height / cell);
 
         const purple = `rgba(${[56, 8, 82].join()},1)`;
         const yellow = `rgba(${[219, 214, 46].join()},1)`;
-        var green = `rgba(${[33, 171, 26].join()},1)`;
-        var blue = `rgba(${[0, 204, 197].join()},1)`;
+        const green = `rgba(${[33, 171, 26].join()},1)`;
+        const blue = `rgba(${[0, 204, 197].join()},1)`;
 
         context.save();
-        for (var x = 0, i = 0; i < rows; x += cell, i++) {
+        let x = 0, i = 0;
+        for (; i < rows; x += cell, i++) {
 
-            for (var y = 0, j = 0; j < columns; y += cell, j++) {
+            let y = 0, j = 0;
+            for (; j < columns; y += cell, j++) {
 
                 if (j < columns / 2 && i < rows / 2) {
                     context.fillStyle = purple;
@@ -221,30 +223,30 @@ export default class World {
 
     // spawn ammo randomly based on type over the map
     generateAmmo(n, type) {
-        for (var i = 0; i < n; i++) {
-            var ammo = this.ammunitionFactory.getAmmo(type);
+        for (let i = 0; i < n; i++) {
+            const ammo = this.ammunitionFactory.getAmmo(type);
             this.addActor(ammo);
         }
     }
 
     // randomly spawn ai based on type on the map
     generateAi(n, type) {
-        for (var i = 0; i < n; i++) {
-            var x = randint(this.width - 2 * 50) + 50;
-            var y = randint(this.height - 2 * 50) + 50;
-            var position = new Pair(x, y);
+        for (let i = 0; i < n; i++) {
+            const x = randint(this.width - 2 * 50) + 50;
+            const y = randint(this.height - 2 * 50) + 50;
+            const position = new Pair(x, y);
 
-            var ai = this.aiFactory.getAi(position, type);
+            const ai = this.aiFactory.getAi(position, type);
             this.addActor(ai);
         }
     }
 
     // generate walls boundaries on all 4 sides of world
     generateBoundaries() {
-        var leftWall = new Wall(new Pair(-this.width, -this.height), 'rgba(77,77,77,1)', this.width, 3 * this.height);
-        var topWall = new Wall(new Pair(0, -this.height), 'rgba(77,77,77,1)', this.width, this.height);
-        var rightWall = new Wall(new Pair(this.width, -this.height), 'rgba(77,77,77,1)', this.width, 3 * this.height);
-        var bottomWall = new Wall(new Pair(0, this.height), 'rgba(77,77,77,1)', this.width, this.height);
+        const leftWall = new Wall(new Pair(-this.width, -this.height), 'rgba(77,77,77,1)', this.width, 3 * this.height);
+        const topWall = new Wall(new Pair(0, -this.height), 'rgba(77,77,77,1)', this.width, this.height);
+        const rightWall = new Wall(new Pair(this.width, -this.height), 'rgba(77,77,77,1)', this.width, 3 * this.height);
+        const bottomWall = new Wall(new Pair(0, this.height), 'rgba(77,77,77,1)', this.width, this.height);
 
         this.addActor(leftWall);
         this.addActor(topWall);
@@ -267,7 +269,7 @@ export default class World {
     }
 
     removeActor(actor) {
-        var index = this.actors.indexOf(actor);
+        const index = this.actors.indexOf(actor);
         if (index !== -1) {
             this.actors.splice(index, 1);
         }
@@ -280,11 +282,12 @@ export default class World {
         this.camera.x = this.player.x - this.camera.width / 2;
         this.camera.y = this.player.y - this.camera.height / 2;
 
+        console.log(this.actors.length)
         // for each actor, take a step and perform operations
-        for (var i = 0; i < this.actors.length; i++) {
+        for (let i = 0; i < this.actors.length; i++) {
 
-            var actor1 = this.actors[i];
-            var className = actor1.constructor.name;
+            const actor1 = this.actors[i];
+            const className = actor1.constructor.name;
 
             // if actor1 is ai or player, change conditions based on terrain
             if (className === "Ai" || className === "Player") {
@@ -305,13 +308,12 @@ export default class World {
 
             // if actor1 is ai, move/shoot depending on position to player
             if (className === "Ai") {
-                var AiToPlayerVector = this.player.position.copy().sub(actor1.position);
-                var x = AiToPlayerVector.x;
-                var y = AiToPlayerVector.y;
+                const AiToPlayerVector = this.player.position.copy().sub(actor1.position);
+                const x = AiToPlayerVector.x;
+                const y = AiToPlayerVector.y;
 
                 if (x * x + y * y >= 300 * 300) {
-                    var normalized = AiToPlayerVector.normalize().mult(AiSpeed);
-                    actor1.velocity = normalized;
+                    actor1.velocity = AiToPlayerVector.normalize().mult(AiSpeed);
                     clearInterval(actor1.interval);
                     actor1.interval = null;
 
@@ -320,8 +322,8 @@ export default class World {
                     if (actor1.interval === null) {
 
                         actor1.interval = setInterval((world, actor, player) => {
-                            var position = actor.turret_position.copy();
-                            var velocity = player.position.copy().sub(actor.position).normalize().mult(25);
+                            const position = actor.turret_position.copy();
+                            const velocity = player.position.copy().sub(actor.position).normalize().mult(25);
 
                             world.shootBullet(position, velocity, actor.weapon, actor);
                         }, 1000, this, actor1, this.player);
@@ -334,10 +336,10 @@ export default class World {
 
             // if actor1 is an ai, player, or bullet, check collisions
             if (className === "Ai" || className === "Player" || className === "Bullet") {
-                for (var j = 0; j < this.actors.length; j++) {
+                for (let j = 0; j < this.actors.length; j++) {
 
-                    var actor2 = this.actors[j];
-                    var className2 = actor2.constructor.name;
+                    const actor2 = this.actors[j];
+                    const className2 = actor2.constructor.name;
 
                     // ignore actor 2 if they are a bullet or ammo. smart :)
                     if (className === "Bullet" && (className2 === "Bullet" || className2 === "Ammo") || i === j) {
@@ -353,7 +355,7 @@ export default class World {
 
     // return the first actor at coordinates (x,y) return null if there is no such actor
     getActor(x, y) {
-        for (var i = 0; i < this.actors.length; i++) {
+        for (let i = 0; i < this.actors.length; i++) {
             if (this.actors[i].x === x && this.actors[i].y === y) {
                 return this.actors[i];
             }
