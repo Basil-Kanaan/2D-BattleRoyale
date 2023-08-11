@@ -16,7 +16,7 @@ function rand(n) {
 }
 
 let playerHealth = 100;
-const AiSpeed = 12;
+const AiSpeed = 3.5;
 
 // Model! World
 export default class World {
@@ -148,7 +148,7 @@ export default class World {
             const mouseRelativePos = this.camera.getMousePos(this.mouse);
 
             const position = this.player.turret_position.copy();
-            const velocity = mouseRelativePos.sub(playerRelativePos).normalize().mult(25);
+            const velocity = mouseRelativePos.sub(playerRelativePos).normalize().mult(AiSpeed*2);
 
             this.shootBullet(position, velocity, this.player.weapon, this.player);
             this.player.ammo[this.player.weapon]--;
@@ -322,7 +322,7 @@ export default class World {
 
                         actor1.interval = setInterval((world, actor, player) => {
                             const position = actor.turret_position.copy();
-                            const velocity = player.position.copy().sub(actor.position).normalize().mult(25);
+                            const velocity = player.position.copy().sub(actor.position).normalize().mult(AiSpeed*2);
 
                             world.shootBullet(position, velocity, actor.weapon, actor);
                         }, 1000, this, actor1, this.player);

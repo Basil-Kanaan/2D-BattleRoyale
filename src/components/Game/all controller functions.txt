@@ -10,8 +10,6 @@ let world = null;
 let interval = null;
 let credentials = {"username": "", "password": ""};
 
-const speed = 22;
-
 // movement map and velocity
 const moveMap = {
     'a': new Pair(-1, 0),

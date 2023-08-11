@@ -62,20 +62,37 @@ export default class Camera {
             this.actors[i].draw(context, this);
         }
 
-        var center = new Pair(this.width / 2, this.height / 2);
+        const center = new Pair(this.width / 2, this.height / 2);
+        const scoreTxt = "SCORE: " + this.world.player.score;
+        const ammoTxt = `AMMO: ${this.world.player.ammo[this.world.player.weapon]} (${this.world.player.weapon})`;
+        const measure = {};
 
-        // add score, ammo and potentially game over text to screen.
-        var scoreTxt = "SCORE: " + this.world.player.score;
-        var ammoTxt = "AMMO: " + this.world.player.ammo[this.world.player.weapon] + ` (${this.world.player.weapon})`;
-        var gameOverTxt = "GAME OVER";
+        const drawText = (context, text, x, y, font, gradientColors, align = "left") => {
+            context.save();
+            context.font = font;
+            measure.width = context.measureText(text).width;
+            x = Math.floor(x);
+            y = Math.floor(y);
 
-        var measure;
-        var txtWidth;
+            if (align === "center"){
+                x -= measure.width/2;
+            } else if (align === "right") {
+                x -= measure.width;
+            }
+
+            const gradient = context.createLinearGradient(x, y, x + measure.width, y);
+            const gradLen = !(gradientColors.length - 1) ? 1 : gradientColors.length - 1 ;
+
+            gradientColors.forEach((color, index) => gradient.addColorStop(index / (gradLen), color));
+
+            context.fillStyle = gradient;
+            context.fillText(text, x, y);
+            context.strokeText(text, x, y);
+            context.restore();
+        };
 
         if (this.world.end) {
-
-            // Create gradient
-            var gradient = context.createRadialGradient(center.x, center.y, 200, center.x, center.y, 300);
+            const gradient = context.createRadialGradient(center.x, center.y, 200, center.x, center.y, 300);
             gradient.addColorStop("0", "gray");
             gradient.addColorStop("1.0", "black");
 
@@ -90,49 +107,13 @@ export default class Camera {
             context.stroke();
             context.closePath();
 
-            context.save();
-            context.font = "bold 60px Verdana";
-            measure = context.measureText(gameOverTxt);
-            txtWidth = ~~(measure.width);
+            let GOtext = "GAME OVER";
+            drawText(context, GOtext, center.x, center.y, "bold 60px Verdana", ["black"], "center");
 
-            context.fillStyle = "black";
-            context.fillText(gameOverTxt, center.x - txtWidth / 2, center.y);
-            context.restore();
-
-            context.save();
-            context.font = "50px Verdana";
-            measure = context.measureText(scoreTxt);
-            txtWidth = ~~(measure.width);
-
-            // Create gradient
-            var gradient = context.createLinearGradient(center.x - txtWidth / 2, center.y, center.x + txtWidth / 2, center.y);
-            gradient.addColorStop("0", " magenta");
-            gradient.addColorStop("0.5", "blue");
-            gradient.addColorStop("1.0", "red");
-
-            // Fill with gradient
-            context.fillStyle = gradient;
-            context.fillText(scoreTxt, center.x - txtWidth / 2, center.y + 70);
-            context.restore();
+            drawText(context, scoreTxt, center.x, center.y + 70, "50px Verdana", ["magenta", "blue", "red"], "center");
         } else {
-            context.save();
-            context.font = "30px Verdana";
-            measure = context.measureText(scoreTxt);
-            txtWidth = ~~(measure.width) + 15;
-
-            // Create gradient
-            var gradient = context.createLinearGradient(this.width - txtWidth, this.height - 15, this.width, this.height);
-            gradient.addColorStop("0", " magenta");
-            gradient.addColorStop("0.5", "blue");
-            gradient.addColorStop("1.0", "red");
-
-            // Fill with gradient
-            context.fillStyle = gradient;
-            context.fillText(scoreTxt, this.width - txtWidth, this.height - 15);
-
-            context.fillStyle = "black";
-            context.fillText(ammoTxt, 10, this.height - 15);
-            context.restore();
+            drawText(context, scoreTxt, this.width - 15, this.height - 15, "35px Verdana", ["magenta", "blue", "red"], "right");
+            drawText(context, ammoTxt, 10, this.height - 15, "35px Verdana", ["magenta", "blue", "red"]);
         }
     }
 

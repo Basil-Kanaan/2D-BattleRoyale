@@ -15,7 +15,8 @@ let interval = null;
 let difficulty = "medium";
 // let credentials = {"username": "", "password": ""};
 
-const speed = 22;
+const speed = 5;
+const intervalMS = 16.7;
 
 let canvasRef = null;
 
@@ -76,7 +77,7 @@ function startGame() {
             // saveScore();
             endGame();
         }
-    }, 100);
+    }, intervalMS);
 }
 
 // clear world interval

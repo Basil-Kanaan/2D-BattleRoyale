@@ -32,6 +32,7 @@ export default class AmmunitionFactory {
                 radius = 6;
                 colour = 'rgba(123,57,0,1)';
                 damage = 20;
+                velocity.mult(1.2);
                 break;
 
             case "cannon":
