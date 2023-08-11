@@ -3,7 +3,8 @@ import {makeStyles} from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
 
     hero: {
-        height: '90vh',
+        minHeight: '60vh',
+        padding: theme.spacing(20), // Increase padding for larger button
         backgroundImage: 'url(https://wallpapercave.com/wp/wp6308454.jpg)',
         backgroundRepeat: 'no-repeat',
         backgroundColor:
@@ -51,34 +52,38 @@ const useStyles = makeStyles((theme) => ({
     },
 
     about: {
-        height: '80vh',
+        padding: theme.spacing(2), // Add padding to the whole about section
     },
     aboutContent: {
-        display: 'flex', // Use flexbox layout
-        flexDirection: 'column', // Stack content vertically
-        justifyContent: 'center', // Center content horizontally
-        alignItems: 'center', // Center content vertically
-        height: '100%', // Stretch container vertically
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100%',
+        padding: theme.spacing(2), // Add padding to the content container
         [theme.breakpoints.down('sm')]: {
-            flexDirection: 'column', // Stack content vertically on small screens
-            textAlign: 'center', // Center content horizontally on small screens
+            flexDirection: 'column',
+            textAlign: 'center',
         },
     },
     aboutText: {
-        flex: 1, // Equal distribution of space
-        display: 'flex', // Use flexbox layout
-        flexDirection: 'column', // Stack items vertically
-        justifyContent: 'center', // Center content horizontally
-        alignItems: 'center', // Center content vertically
-        padding: theme.spacing(10, 5, 5, 5), // Add spacing around text
-        textAlign: 'center'
+        flex: 1,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: theme.spacing(2), // Adjust the padding around text
+        textAlign: 'center',
+        [theme.breakpoints.down('sm')]: {
+            padding: theme.spacing(1), // Adjust the padding on small screens
+        },
     },
     aboutImage: {
-        flex: 1, // Equal distribution of space
-        display: 'flex', // Use flexbox layout for image
-        justifyContent: 'center', // Center image horizontally
-        alignItems: 'center', // Center image vertically
-        padding: theme.spacing(2), // Add padding to image container
+        flex: 1,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: theme.spacing(2),
     },
     subimage: {
         maxWidth: '100%', // Ensure image scales to container
